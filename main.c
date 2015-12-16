@@ -49,7 +49,9 @@ int main (void)
 	{
 		distance[q] = 1.001 + q*dd;
 	}
-
+	
+	//VEGAS Integration
+	
 	for(int j = 0; j < np; j++)
 	{
 		struct my_params params = {distance[j]};
@@ -88,6 +90,8 @@ int main (void)
 
 	timer_start();
 
+	//Handmade Monte Carlo Integrator
+
 	for(int j = 0; j < 20.; j++)
 	{
 	    double d = 1.001 + j * dd;
@@ -120,6 +124,8 @@ int main (void)
 
 	double t2 = timer_stop();
 
+	//Dipole Approximation
+
 	double dipole_energy[20];
 	for(int u = 0; u < tot; u++)
 	{
@@ -134,6 +140,8 @@ int main (void)
 	}
 
 	printf("Time for VEGAS:  %.6f\nTime for HANDMADE:  %.6f\n", t1, t2);	
+
+	//Plots the 3 methods vs. distance automatically (function in plotfun.h)
 
 	pfun(distance, vegas_energy, handmade_energy, dipole_energy, 20);
 	
